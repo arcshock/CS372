@@ -8,10 +8,7 @@
 #include <iostream>
 #include <array>
 #include <chrono>
-#include <ctime>
 #include <string>
-#include <sstream>
-#include <fstream>
 
 
 std::string timingManager(NeuralNet<4> & neuralNet, int iterations);
@@ -29,7 +26,7 @@ int main()
 	test1.forwardFeed();
 
 	messaging("Timing");
-	std::cout << timingManager(test1, 50) << std::endl; 
+	std::cout << timingManager(test1, 50) << "\n" << std::endl; 
 
 	messaging("Printing Network Weights");
 	test1.printNetworkWeights();
@@ -58,25 +55,20 @@ void messaging(std::string message)
 
 // Precondition:
 // iterations are the number of times to call the feedforward function from class NeuralNet
-// numOfBoardEval 
+//
+// Post Conditions:
+// Returns a string with relevent timing of the feedForward function.
 std::string timingManager(NeuralNet<4> & neuralNet, int iterations)
 {
 	std::vector<double> times;
 
 	for (int i = 0; i < iterations; ++i) {
-		times.push_back(timingFunc(iterations*20, neuralNet));
+		times.push_back(timingFunc(iterations, neuralNet));
 	}
-	
-	// Report string construction.
-	
-	auto timeMessage = "Completed " + std::to_string(iterations) + " iterations of feed forward function in " + " seconds.";
-/*	std::ostringstream timingMessage;
-	timingMessage << "Completed " << iterations << " iteration(s) of ";
-	timingMessage << iterations << " board evaluation(s) in average time of ";
-	timingMessage << timeavg(times.begin(), times.end(), iterations) << " second(s)." << std::endl;
-	timingMessage << "Average time of board evaluation: " << iterations/timeavg(times.begin(), times.end(), iterations) << " per second." << std::endl;
 
-	return timingMessage.str();*/
+	// Report string construction.
+	auto timeMessage = "Completed " + std::to_string(iterations) + " iterations of feed forward function in " + 
+	std::to_string(timeavg(times.begin(), times.end(), times.size())) + " ms.";
 	return timeMessage;
 }
 
@@ -84,33 +76,35 @@ std::string timingManager(NeuralNet<4> & neuralNet, int iterations)
 // iterations are the number of times to call the feedforward function from class NeuralNet
 // 
 // Post Condition:
-// Returns the total time to execute the number of iterations of the feedforward function.
+// Returns the total time to execute the number of iterations of the feedforward function in ms.
 double timingFunc(int iterations, NeuralNet<4> & neuralNet)
 {
-	// setup timing
-	std::chrono::time_point<std::chrono::system_clock> start, end;
-	start = std::chrono::system_clock::now();
+	auto startTime = std::chrono::system_clock::now();
 
 	for (auto i = 0; i < iterations; ++i)
 		neuralNet.forwardFeed();
 
-	// end timer and find duration
-	end = std::chrono::system_clock::now();
-	std::chrono::duration<double> elapsed_seconds = end - start;
+	auto endTime = std::chrono::system_clock::now();
+	auto elapsedTime = endTime - startTime;
 
-	return elapsed_seconds.count();
+	return std::chrono::duration <double, std::milli> (elapsedTime).count();
 }
 
 // Precondition: 
 // The begin and end iterators are for a vector that contain times for a feedforward call.
 // Samples are the number of iterations for that time. <- Need to rething this.
+//
+// Post Condition:
+// Return the average to the times.
 double timeavg(std::vector<double>::iterator begin, std::vector<double>::iterator end, int samples)
 {
-	double runningTotal = 0;
+	auto runningTotal = 0.0;
 
-	for (auto iter = begin; begin != end; ++begin)
+	for (auto iter = begin; begin != end; ++begin) {
 		runningTotal += *iter;
+	}
 
-	return runningTotal/samples;
+	auto average = runningTotal/samples;
+	
+	return average;
 }
-
