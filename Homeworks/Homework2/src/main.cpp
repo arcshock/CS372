@@ -29,12 +29,12 @@ int main()
 	test1.forwardFeed();
 
 	messaging("Timing");
-	std::cout << timingManager(test1, 5000) << std::endl; 
+	std::cout << timingManager(test1, 50) << std::endl; 
 
-	messaging("Printing Network");
+	messaging("Printing Network Weights");
 	test1.printNetworkWeights();
 
-	messaging("Mutating Network");
+	messaging("Mutating Network Weights");
 	test1.mutateNetwork();
 	test1.printNetworkWeights();
 
@@ -68,13 +68,16 @@ std::string timingManager(NeuralNet<4> & neuralNet, int iterations)
 	}
 	
 	// Report string construction.
-	std::ostringstream timingMessage;
+	
+	auto timeMessage = "Completed " + std::to_string(iterations) + " iterations of feed forward function in " + " seconds.";
+/*	std::ostringstream timingMessage;
 	timingMessage << "Completed " << iterations << " iteration(s) of ";
 	timingMessage << iterations << " board evaluation(s) in average time of ";
 	timingMessage << timeavg(times.begin(), times.end(), iterations) << " second(s)." << std::endl;
 	timingMessage << "Average time of board evaluation: " << iterations/timeavg(times.begin(), times.end(), iterations) << " per second." << std::endl;
 
-	return timingMessage.str();
+	return timingMessage.str();*/
+	return timeMessage;
 }
 
 // Precondition:
@@ -88,7 +91,7 @@ double timingFunc(int iterations, NeuralNet<4> & neuralNet)
 	std::chrono::time_point<std::chrono::system_clock> start, end;
 	start = std::chrono::system_clock::now();
 
-	for (int i = 0; i < iterations; ++i)
+	for (auto i = 0; i < iterations; ++i)
 		neuralNet.forwardFeed();
 
 	// end timer and find duration
