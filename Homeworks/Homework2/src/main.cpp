@@ -9,7 +9,8 @@
 #include <array>
 #include <chrono>
 #include <string>
-
+#include <future>
+#include <functional> 
 
 std::string timingManager(NeuralNet<4> & neuralNet, int iterations);
 double timingFunc(int iterations, NeuralNet<4> & neuralNet); // used for timing board evals
@@ -25,8 +26,15 @@ int main()
 	test1.setWeights();
 	test1.forwardFeed();
 
+	NeuralNet< hidden_layers.size() > * pointer = & test1;
+
 	messaging("Timing");
-	std::cout << timingManager(test1, 50) << "\n" << std::endl; 
+	auto firstTiming = std::async(std::launch::async, timingManager, std::ref(test1), 50);
+	auto secondTiming = std::async(std::launch::async, timingManager, std::ref(test1), 50);
+	std::cout << firstTiming.get() << std::endl;
+	std::cout << secondTiming.get() << std::endl;
+	std::cout << timingManager(test1, 50) << std::endl;
+	
 
 	messaging("Printing Network Weights");
 	test1.printNetworkWeights();
@@ -63,11 +71,14 @@ std::string timingManager(NeuralNet<4> & neuralNet, int iterations)
 	std::vector<double> times;
 
 	for (int i = 0; i < iterations; ++i) {
-		times.push_back(timingFunc(iterations, neuralNet));
+		auto timingIteration1 = std::async(std::launch::async, timingFunc, iterations, std::ref(neuralNet));
+		auto timingIteration2 = std::async(std::launch::async, timingFunc, iterations, std::ref(neuralNet));
+		times.push_back(timingIteration1.get());
+		times.push_back(timingIteration2.get());
 	}
 
 	// Report string construction.
-	auto timeMessage = "Completed " + std::to_string(iterations) + " iterations of feed forward function in " + 
+	auto timeMessage = "Completed " + std::to_string(iterations) + " iterations of feed forward function in average time of " + 
 	std::to_string(timeavg(times.begin(), times.end(), times.size())) + " ms.";
 	return timeMessage;
 }
@@ -79,12 +90,12 @@ std::string timingManager(NeuralNet<4> & neuralNet, int iterations)
 // Returns the total time to execute the number of iterations of the feedforward function in ms.
 double timingFunc(int iterations, NeuralNet<4> & neuralNet)
 {
-	auto startTime = std::chrono::system_clock::now();
+	auto startTime = std::chrono::steady_clock::now();
 
 	for (auto i = 0; i < iterations; ++i)
 		neuralNet.forwardFeed();
 
-	auto endTime = std::chrono::system_clock::now();
+	auto endTime = std::chrono::steady_clock::now();
 	auto elapsedTime = endTime - startTime;
 
 	return std::chrono::duration <double, std::milli> (elapsedTime).count();
