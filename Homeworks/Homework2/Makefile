@@ -4,7 +4,7 @@
 # 
 CC = g++
 CC_TAU = tau_cxx.sh
-CFLAGS =  -std=c++11 
+CFLAGS =  -std=c++11 -pthread 
 CFLAGS_DEBUG = -Wall -g -pg
 INCLUDES = -I ./includes/
 # LFLAGS
