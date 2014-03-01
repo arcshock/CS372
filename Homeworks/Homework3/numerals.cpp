@@ -25,6 +25,14 @@ std::map<int, std::string, std::greater<int> > intToNumeralsMapping {
 	{1, "I"}
 };
 
+/* == Function printNumeral ================================
+ *
+ * Precondition: number >= 0
+ *
+ * Post Condition: Return a string containing Roman Numerals
+ * 	representing the value of number.
+ *
+ * ======================================================== */
 std::string printNumeral(int number)
 {
 	std::string numeralString = "";
