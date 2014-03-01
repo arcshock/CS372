@@ -8,32 +8,30 @@
 
 #include "catch.hpp"
 #include <string>
+#include <map>
+#include <functional>
 
 std::string printNumeral(int number);
+
+std::map<int, std::string, std::greater<int> > intToNumeralsMapping {
+	{100, "C"},	
+	{50, "L"},	
+	{10, "X"},	
+	{5, "V"},	
+	{1, "I"}
+};
 
 std::string printNumeral(int number)
 {
 	std::string numeralString = "";
 
-	while (number > 0) {
-		if (number == 100) {
-			numeralString += "C";
-			number -= 100;
-		} else if (number == 50) {
-			numeralString += "L";
-			number -= 50;
-		} else if (number == 10) {
-			numeralString += "X";
-			number -= 10;
-		} else if (number == 5) {
-			numeralString += "V";
-			number -= 5;
-		} else {
-			numeralString += "I";
-			--number;
+	for (auto kv : intToNumeralsMapping) {
+		while (number >= kv.first) {
+			number -= kv.first;
+			numeralString += kv.second;
 		}
 	}
-	
+
 	return numeralString;
 }
 
