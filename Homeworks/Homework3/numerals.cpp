@@ -11,7 +11,7 @@
 #include <map>
 #include <functional>
 
-std::string printNumeral(int number);
+std::string intToNumeral(int number);
 
 std::map<int, std::string, std::greater<int> > intToNumeralsMapping {
 	{100, "C"},	
@@ -25,7 +25,7 @@ std::map<int, std::string, std::greater<int> > intToNumeralsMapping {
 	{1, "I"}
 };
 
-/* == Function printNumeral ================================
+/* == Function intToNumeral ================================
  *
  * Precondition: number >= 0
  *
@@ -33,7 +33,7 @@ std::map<int, std::string, std::greater<int> > intToNumeralsMapping {
  * 	representing the value of number.
  *
  * ======================================================== */
-std::string printNumeral(int number)
+std::string intToNumeral(int number)
 {
 	std::string numeralString = "";
 
@@ -48,16 +48,16 @@ std::string printNumeral(int number)
 }
 
 TEST_CASE("Numeral Test") {
-	REQUIRE( printNumeral(0) == "" );
-	REQUIRE( printNumeral(1) == "I" );
-	REQUIRE( printNumeral(2) == "II" );
-	REQUIRE( printNumeral(3) == "III" );
-	REQUIRE( printNumeral(4) == "IV" );
-	REQUIRE( printNumeral(5) == "V" );
-	REQUIRE( printNumeral(7) == "VII" );
-	REQUIRE( printNumeral(9) == "IX" );
-	REQUIRE( printNumeral(10) == "X" );
-	REQUIRE( printNumeral(50) == "L" );
-	REQUIRE( printNumeral(99) == "XCIX" );
-	REQUIRE( printNumeral(100) == "C" );
+	REQUIRE( intToNumeral(0) == "" );
+	REQUIRE( intToNumeral(1) == "I" );
+	REQUIRE( intToNumeral(2) == "II" );
+	REQUIRE( intToNumeral(3) == "III" );
+	REQUIRE( intToNumeral(4) == "IV" );
+	REQUIRE( intToNumeral(5) == "V" );
+	REQUIRE( intToNumeral(7) == "VII" );
+	REQUIRE( intToNumeral(9) == "IX" );
+	REQUIRE( intToNumeral(10) == "X" );
+	REQUIRE( intToNumeral(50) == "L" );
+	REQUIRE( intToNumeral(99) == "XCIX" );
+	REQUIRE( intToNumeral(100) == "C" );
 }
