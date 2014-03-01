@@ -13,12 +13,16 @@ std::string printNumeral(int number);
 
 std::string printNumeral(int number)
 {
-	if (number == 1)
-		return "I";
-	else if (number == 2)
-		return "II";
+	std::string numeralString = "";
 
-	return "";
+	if (number == 1)
+		numeralString += "I";
+	else if (number == 2)
+		numeralString += "II";
+	else if (number == 3)
+		numeralString += "III";
+	
+	return numeralString;
 }
 
 TEST_CASE("Numeral Test") {
