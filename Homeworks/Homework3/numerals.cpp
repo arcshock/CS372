@@ -18,6 +18,7 @@ std::map<int, std::string, std::greater<int> > intToNumeralsMapping {
 	{50, "L"},	
 	{10, "X"},	
 	{5, "V"},	
+	{4, "IV"},
 	{1, "I"}
 };
 
