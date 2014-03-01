@@ -16,7 +16,10 @@ std::string printNumeral(int number)
 	std::string numeralString = "";
 
 	while (number > 0) {
-		if (number == 10) {
+		if (number == 50) {
+			numeralString += "L";
+			number -= 50;
+		} else if (number == 10) {
 			numeralString += "X";
 			number -= 10;
 		} else if (number == 5) {
