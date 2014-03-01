@@ -15,6 +15,7 @@ std::string printNumeral(int number);
 
 std::map<int, std::string, std::greater<int> > intToNumeralsMapping {
 	{100, "C"},	
+	{99, "XCIX"},
 	{50, "L"},	
 	{10, "X"},	
 	{9, "IX"},
