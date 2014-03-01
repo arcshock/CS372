@@ -5,3 +5,7 @@
 CC = g++
 CFLAGS =  -std=c++11
 CFLAGS_DEBUG = -Wall -g -pg
+SRC=numerals.cpp
+
+all:
+	$(CC) $(CFLAGS) $(SRC)  -o ./build/numerals.out
