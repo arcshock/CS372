@@ -10,3 +10,5 @@ INCLUDE = -I ./Catch/single_include/
 
 all:
 	$(CC) $(CFLAGS) $(INCLUDE) $(SRC)  -o ./build/numerals.out
+run:
+	./build/numerals.out
