@@ -7,3 +7,15 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
+#include <string>
+
+std::string printNumeral(int number);
+
+std::string printNumeral(int number)
+{
+	return "";
+}
+
+TEST_CASE("Numeral Test") {
+	REQUIRE( printNumeral(0) == "" );
+}
