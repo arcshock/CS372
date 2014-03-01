@@ -15,12 +15,9 @@ std::string printNumeral(int number)
 {
 	std::string numeralString = "";
 
-	if (number == 1)
+	for (auto ii = 0; ii < number; ++ii) {
 		numeralString += "I";
-	else if (number == 2)
-		numeralString += "II";
-	else if (number == 3)
-		numeralString += "III";
+	}
 	
 	return numeralString;
 }
