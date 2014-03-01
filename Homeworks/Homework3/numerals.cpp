@@ -13,6 +13,9 @@ std::string printNumeral(int number);
 
 std::string printNumeral(int number)
 {
+	if (number == 1)
+		return "I";
+
 	return "";
 }
 
