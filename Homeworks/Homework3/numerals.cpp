@@ -27,4 +27,5 @@ TEST_CASE("Numeral Test") {
 	REQUIRE( printNumeral(1) == "I" );
 	REQUIRE( printNumeral(2) == "II" );
 	REQUIRE( printNumeral(3) == "III" );
+	REQUIRE( printNumeral(5) == "V" );
 }
