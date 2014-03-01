@@ -38,4 +38,5 @@ TEST_CASE("Numeral Test") {
 	REQUIRE( printNumeral(3) == "III" );
 	REQUIRE( printNumeral(5) == "V" );
 	REQUIRE( printNumeral(10) == "X" );
+	REQUIRE( printNumeral(50) == "L" );
 }
