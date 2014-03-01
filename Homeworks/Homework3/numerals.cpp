@@ -15,8 +15,14 @@ std::string printNumeral(int number)
 {
 	std::string numeralString = "";
 
-	for (auto ii = 0; ii < number; ++ii) {
-		numeralString += "I";
+	while (number > 0) {
+		if (number == 5) {
+			numeralString += "V";
+			number -= 5;
+		} else {
+			numeralString += "I";
+			--number;
+		}
 	}
 	
 	return numeralString;
