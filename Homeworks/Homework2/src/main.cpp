@@ -26,8 +26,6 @@ int main()
 	test1.setWeights();
 	test1.forwardFeed();
 
-	NeuralNet< hidden_layers.size() > * pointer = & test1;
-
 	messaging("Timing");
 	auto firstTiming = std::async(std::launch::async, timingManager, std::ref(test1), 50);
 	auto secondTiming = std::async(std::launch::async, timingManager, std::ref(test1), 50);
