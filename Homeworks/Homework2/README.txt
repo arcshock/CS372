@@ -1,6 +1,6 @@
 Author: Bucky Frost
 File: README.txt
-Purpose: Discription file of the present directory.
+Purpose: Discription file of Homework 2 directory.
 
-	A partial fork of the CS405 repository for the purpose re-implementing
-	the main function with C++11 features.
+	This homework directory is a partial fork of the CS405 repository for the 
+purpose re-implementing the main function with C++11 features.
