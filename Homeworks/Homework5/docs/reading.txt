@@ -1,0 +1,47 @@
+Author: Bucky Frost
+File: reading.txt
+Purpose: Notes on the assigned reading for assignment 5
+	The site that the reading is on is
+	www.tailrecursive.org/postscript/
+
+
+
+For subsection: What is PostScript?
+
+Is a page description language: a language for printing gfx and text.
+*stack based
+
+
+For subsection: Graphics Concepts
+
+Pages are defined within the first quadrant of the Cartesian coordinate
+system
+
+ ^
+ |
+ |
+ |
+ |
+ |
+ |
+ |
+0+------------------>
+ 0
+
+ There is also the transform matrix (oh boy) its 3x3...
+
+ There is clipping as with OpenGL, it is usually a path that defines the
+ margin of the page. This can be set arbitrarily.
+
+ Graphics State is a stack much like OpenGL's matrix stack.
+
+
+
+ For subsection Programming in PostScript
+
+ want to escape names of vars by a / to ensure the name string is being set to
+ a new value
+
+ 	/x 5 def
+
+
