@@ -1,5 +1,4 @@
 %!
-% Draw a box at 72, 72 using translate
 
 % operator box: xcoord ycoord box -
 % Creates one inch box at xcoord, ycoord
@@ -12,34 +11,11 @@
 	closepath
 } def
 
-gsave				% Preserve the old coordinates
-	72 72 translate		% Set origin to (72, 72)
-	0 0 box stroke		% Draw the box at the new origin
-
-
-	72 0 translate		% Set origin to (72, 72)
-	0 0 box stroke		% Draw the box at the new origin
-
-	72 0 translate		% Set origin to (72, 72)
-	0 0 box stroke		% Draw the box at the new origin
-grestore
-
-gsave 
-	72 144 translate
-	0 0 box stroke
-
-	72 0 translate
-	0 0 box stroke
-
-	72 0 translate
-	0 0 box stroke
-grestore
-
+% operate boxLine: xcoord ycoord box -
+% Creates line of three boxes definded by operator box
+/boxLine {
 gsave
-	72
-	72 3 mul
 	translate
-
 	0 0 box stroke
 
 	72 0 translate
@@ -47,4 +23,19 @@ gsave
 
 	72 0 translate
 	0 0 box stroke
+grestore
+} def
+
+% operator boxGrid: - boxGrid -
+% Creates a 3x3 gird by calling operator boxLine 3 times.
+/boxGrid {
+72 72 boxLine
+
+72 144 boxLine
+
+72 216 boxLine
+} def
+
+boxGrid
+
 showpage
