@@ -1,0 +1,154 @@
+%!
+	1 setlinecap
+	1 setlinejoin
+	1 setmiterlimit
+
+/inch {72 mul} def
+/oshow { false charpath stroke } def %stack:(string)
+/Times-Roman findfont   % Get the basic font
+30 scalefont            % Scale the font to 20 points
+setfont                 % Make it the current font
+
+newpath                 % Start a new path
+1 inch 700 moveto            % Lower left corner of text at (72, 72)
+(CS 372) show
+1 inch 650 moveto
+(Software Construction) show
+1 inch 600 moveto
+(Derping) show    % Typeset "Hello, world!"
+closepath
+
+
+/circleofAdobe 
+{ 
+	15 15 360 {
+		gsave
+		300 300 translate
+		rotate 0 0 moveto
+		(Look at me!) oshow
+		grestore
+	} for
+} def
+
+%circleofAdobe
+
+/drawFace {
+	gsave
+	.83 .83 .83 setrgbcolor % a light gray color
+	300 300 translate
+	.95 1 scale
+	newpath 0 0 4 inch 0 360 arc closepath %0 0 1 90 0 arcn closepath 
+	fill stroke
+	grestore
+} def
+
+/drawEye {
+	gsave
+	translate
+	.7 1.2 scale
+	0 0 0 setrgbcolor
+	3 setlinewidth
+	newpath 0 0 1.4 inch 1 180 arc closepath stroke
+
+	1 1 1 setrgbcolor
+	newpath 0 0 1.4 inch 1 360 arc closepath
+	fill 
+	grestore
+} def 
+
+/drawSpecularHighlight {
+	gsave
+		translate
+		.5 .5 scale
+		1 1 1 setrgbcolor
+		newpath 0 0 1 inch 1 360 arc closepath
+		fill
+	grestore
+} def
+
+/drawIris {
+	gsave 
+	
+	translate
+	.7 1.2 scale
+	1.00 0.83 0.17 setrgbcolor
+	newpath 0 0 1 inch 1 360 arc closepath
+	fill
+
+	.5 .5 scale
+	0 0 0 setrgbcolor
+	newpath 0 0 1.4 inch 1 360 arc closepath
+	fill
+
+	55 55	drawSpecularHighlight
+
+	.4 .4 scale
+	-30 -30 drawSpecularHighlight
+
+	grestore
+} def
+
+/drawTongue {
+	gsave
+
+	translate
+	1.00 0.47 0.10 setrgbcolor
+	
+
+	-50 rotate
+	.9 1.90 scale
+
+
+
+	newpath 0 0 1 inch 180 0 arc closepath
+	fill
+
+%	300 300 moveto
+%	150 150 200 100 200 200 curveto
+	stroke
+	
+	newpath 
+	1 .17 .0 setrgbcolor
+	5 setlinewidth
+	.0 inch -.2 inch moveto
+	.0 inch -.9 inch lineto
+	closepath
+	stroke
+
+
+	grestore
+} def
+/drawMouth {
+	gsave
+
+	translate
+	1 2 scale
+	1.00 0.00 1.00 setrgbcolor
+	newpath 0 0 1 inch 180 0 arc closepath
+	fill
+
+	grestore
+} def
+
+drawFace
+
+% Draw right eye
+425 375 drawEye
+415 400 drawIris
+
+% Draw left eye
+175 375 drawEye
+190 350 drawIris
+
+300 175 drawMouth
+
+300 105 drawTongue
+
+
+%newpath 0 0 1 inch 1 
+%5 setlinewidth
+%100 500 moveto
+%400 450 80 200 70 arcto
+stroke
+
+showpage
